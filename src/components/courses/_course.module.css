@@ -257,7 +257,23 @@
 .courseCard__button:hover {
   background: #5426c7;
 }
+.courseCard__editButton {
+    width: 100%;
+    padding: 12px 16px;
+    margin-top: 16px;
+    background-color: #4f3b78;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.courseCard__editButton:hover {
+    background-color: #714cb6;
+}
 /* =========================
    Create Course Form
 ========================= */
@@ -391,29 +407,4 @@
 .courseForm__submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-}
-
-/* Responsive */
-
-@media (max-width: 600px) {
-  .coursePage {
-    width: 95%;
-    padding: 20px 0;
-  }
-
-  .courseForm__row {
-    grid-template-columns: 1fr;
-  }
-
-  .courseCard__content {
-    padding: 16px;
-  }
-
-  .courseForm__dynamicRow {
-    flex-direction: column;
-  }
-
-  .courseForm__removeButton {
-    align-self: flex-start;
-  }
 }

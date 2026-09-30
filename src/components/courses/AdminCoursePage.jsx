@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { useAuth } from '../../hooks/FetchUser';
 import Styles from "./_course.module.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import EditCourse from "./EditCourse";
+
 
 const AdminCoursePage = () => {
+    const navigate = useNavigate();
     const { getAllCoursesAdminApi } = useAuth();
     const [courses, setCourses] = useState([]);
 
@@ -24,13 +28,13 @@ const AdminCoursePage = () => {
 
     return (
         <main className={Styles.coursePage}>
-             <header className={Styles.coursePage__header}>
-             <h1 className={Styles.coursePage__title}>All Courses</h1>
-           
-             <Link
-               to="/admin/create-courses"
-               className={Styles.coursePage__createButton}> + Create Course</Link>
-           </header>
+            <header className={Styles.coursePage__header}>
+                <h1 className={Styles.coursePage__title}>All Courses</h1>
+
+                <Link
+                    to="/admin/create-courses"
+                    className={Styles.coursePage__createButton}> + Create Course</Link>
+            </header>
 
             <section className={Styles.coursePage__grid}>
                 {courses.map((course) => (
@@ -90,14 +94,12 @@ const AdminCoursePage = () => {
                                     </ul>
                                 </div>
                             )}
-                            {/* <button
-                          className={Styles.courseModal__enrollButton}
-                          onClick={() => {
-                            console.log("Enroll in course:", course._id);
-                          }}
-                        >
-                          Enroll Now
-                        </button> */}
+                            <button
+                                className={Styles.courseCard__editButton}
+                                onClick={() => navigate(`/admin/edit-courses/${course._id}`)}
+                            >
+                                Edit Course
+                            </button>
                         </div>
                     </article>
                 ))}
