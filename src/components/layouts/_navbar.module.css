@@ -1,0 +1,107 @@
+#navbar {
+   background: #4f3b78; 
+   height: 60px;
+   width: 100%;
+}
+
+
+.container {
+    display: flex;
+    width: 80%;
+    margin:  0 auto;
+    color: #fff;
+    align-items: center;
+    height: inherit;
+    
+}
+
+.container a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.logoBlock {
+flex-basis: 10%;
+display: flex;
+justify-content: flex-start;
+}
+
+.menuBlock {
+flex-basis: 90%;
+display: flex;
+justify-content: flex-end;
+}
+
+.menuBlock nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+}
+
+.menuBlock nav ul li a {
+    padding: 10px;
+}
+.menuBlock button {
+    background: #fff;
+    padding: 10px 21px;
+    display: inline-block;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menuBlock button:hover{
+    background-color: #714cb6;
+    color: #fff;
+}
+/* Courses dropdown */
+.coursesDropdown {
+    position: relative;
+}
+
+.coursesDropdownTrigger {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.menuBlock .coursesDropdownTrigger button {
+    background: transparent;
+    color: #fff;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.coursesDropdownMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    background: #fff;
+    padding: 5px 0;
+    margin: 0;
+    list-style: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.menuBlock nav ul .coursesDropdownMenu li {
+    width: 100%;
+}
+
+.menuBlock nav ul .coursesDropdownMenu li a {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+}
+
+.menuBlock nav ul .coursesDropdownMenu li:hover {
+    background: #f0ebf8;
+}

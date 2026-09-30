@@ -1,0 +1,87 @@
+#auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+#auth .auth_block {
+    background: white;
+    width: 60%;
+    align-items: center;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #efefef;
+
+}
+
+.auth_block header {
+    padding: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgb(107, 27, 181);
+}
+
+.auth_block main {
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.auth_block input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    color: #111;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    background: #efefef;
+    cursor: pointer;
+}
+
+.auth_block input::placeholder {
+    color: rgb(155, 52, 155)
+}
+
+.auth_block button {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #7f3aa2;
+    cursor: pointer;
+}
+
+.auth_block button:hover {
+    background: #927fbf;
+    transition: ease-in-out 0.2s;
+}
+
+.toast {
+    width: 300px;
+    min-height: 50px;
+    box-sizing: border-box;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    transform: translateY(70px);
+}
+
+.toast .btn {
+    width: auto;
+    margin: 0;
+    padding: 6px 10px;
+    border: none;
+    color: white;
+    background: #7f3aa2;
+    border-radius: 5px;
+    cursor: pointer;
+}
