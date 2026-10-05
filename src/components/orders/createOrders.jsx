@@ -8,7 +8,7 @@ const Createorders = () => {
   const { courseId } = useParams();
   const navigate = useNavigate();
 
-  const { getAllCoursesApi, createOrderApi } = useAuth();
+  const { getAllCoursesApi, createOrderApi, GetMe } = useAuth();
 
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -59,14 +59,14 @@ const Createorders = () => {
 
       const response = await createOrderApi(payload);
 
-      console.log("Order response:", response);
+if (response?.success) {
+  await GetMe();
 
-      if (response?.success) {
-        toast.success("Course enrolled successfully!");
+  toast.success("Course enrolled successfully!");
 
-        setTimeout(() => {
-          navigate("/courses");
-        }, 1500);
+  setTimeout(() => {
+    navigate("/courses");
+  }, 1500);
       } else {
         toast.error(response?.message || "Enrollment failed");
       }
