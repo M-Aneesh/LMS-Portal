@@ -8,7 +8,8 @@ import {
 } from "../services/api/authServices";
 import { deleteUser, fetchAllUsers, updateRole ,
 } from "../services/api/adminServices";
-import { fetchAllCourses , fetchAllCoursesAdmin , createCourse} from "../services/api/courseServices";
+import { fetchAllCourses , fetchSingleCourse ,
+  fetchUserContent,fetchAllCoursesAdmin , createCourse ,editCourse} from "../services/api/courseServices";
 
 export const AuthContext = createContext();
 
@@ -236,6 +237,14 @@ const logout = async () => {
     let res=await fetchAllCourses();
     return res
   }
+  const getSingleCourseApi = async(id)=>{
+    let res=await fetchSingleCourse(id)
+    return res
+  } 
+  const getUserContentApi = async(id)=>{
+    let res= await fetchUserContent(id)
+    return res
+  }
   const getAllCoursesAdminApi = async()=>{
     let res = await fetchAllCoursesAdmin()
     return res
@@ -244,12 +253,17 @@ const logout = async () => {
     let res = await createCourse(payload)
     return res
   }
+  const editCourseApi = async (id, payload) => {
+    const res = await editCourse(id, payload);
+    return res;
+  };
   /*-------------------COURSE DATA ENDS HERE---------------- */
   return (
     <>
       <AuthContext.Provider
         value={{ register, login, ActivationUser, token, user , logout , updateUserInfo , updateProfilePicture, updateUserPassword,
-          loading , AllUsers , getAllUsersApi , updateRoleApi , deleteUserApi, getAllCoursesApi , getAllCoursesAdminApi, createCourseApi,
+          loading , AllUsers , getAllUsersApi , updateRoleApi , deleteUserApi, getAllCoursesApi ,getSingleCourseApi ,getAllCoursesAdminApi, createCourseApi,
+          editCourseApi , getUserContentApi
         }}
       >
         {children}

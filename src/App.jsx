@@ -19,6 +19,9 @@ import SingleUser from "./components/Admin/SingleUser";
 import CoursePage from "./components/courses/CoursePage";
 import AdminCoursePage from "./components/courses/AdminCoursePage"
 import CreateCourse from "./components/courses/CreateCourse";
+import EditCourse from "./components/courses/EditCourse";
+import GetSingleCourse from "./components/courses/GetSingleCourse";
+import EnrollContent from "./components/courses/EnrollContent";
 
 const App = () => {
   return (
@@ -40,16 +43,19 @@ const App = () => {
 
                 <Route element={<ProtectedRoutes />}>
                   <Route path="/courses" element={<CoursePage />} />
+                  <Route path="/courses:id" element={<GetSingleCourse/>}/>
                   <Route path="/user/profile" element={<ProfileDashboard />} >
                     <Route index element={<ProfileIndexPage />} />
                     <Route path="update-user-info" element={<UpdateProfileInfo />} />
                     <Route path='update-profile-picture' element={<UpdateProfilePicture />} />
                     <Route path="update-user-password" element={<UpdateUserPassword />} />
+                    <Route path="user-enrollment" element={<EnrollContent/>}/>
                   </Route>
                 </Route>
                 <Route element={<AdminRoute />}>
                   <Route path="/admin/courses" element={<AdminCoursePage />} />
                   <Route path="/admin/create-courses" element={ <CreateCourse /> } />
+                  <Route path="/admin/edit-courses/:id" element={<EditCourse/>} />
                   <Route path="admin/admin-dashboard" element={<AdminDashboard />}>
                     <Route index element={<GetAllUsers />} />
                     <Route path="user/:id" element={<SingleUser />} />

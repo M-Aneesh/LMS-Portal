@@ -1,0 +1,207 @@
+.orderPage {
+  width: min(92%, 1000px);
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.orderPage__loading,
+.orderPage__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+}
+
+.orderPage__empty h2 {
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.orderPage__backButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #6c3ce9;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.orderPage__backButton:hover {
+  background: #5426c7;
+}
+
+
+/* =========================
+   Order Card
+========================= */
+
+.orderCard {
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.orderCard__header {
+  padding: 28px 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.orderCard__title {
+  margin: 0 0 8px;
+  color: #222;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.orderCard__subtitle {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   Course Details
+========================= */
+
+.orderCard__course {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  padding: 30px;
+}
+
+.orderCard__image {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.orderCard__details {
+  min-width: 0;
+}
+
+.orderCard__courseTitle {
+  margin: 0 0 12px;
+  color: #222;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.orderCard__description {
+  margin: 0 0 20px;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.orderCard__info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.orderCard__infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
+
+.orderCard__infoItem span {
+  color: #777;
+  font-size: 12px;
+}
+
+.orderCard__infoItem strong {
+  color: #222;
+  font-size: 14px;
+}
+
+
+/* =========================
+   Price
+========================= */
+
+.orderCard__priceSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 30px;
+  padding: 20px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.orderCard__priceSection span {
+  color: #555;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.orderCard__priceSection strong {
+  color: #6c3ce9;
+  font-size: 24px;
+}
+
+
+/* =========================
+   Actions
+========================= */
+
+.orderCard__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 24px 30px 30px;
+}
+
+.orderCard__cancelButton,
+.orderCard__confirmButton {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.orderCard__cancelButton {
+  background: #f0f0f0;
+  color: #444;
+}
+
+.orderCard__cancelButton:hover {
+  background: #e5e5e5;
+}
+
+.orderCard__confirmButton {
+  background: #6c3ce9;
+  color: #fff;
+}
+
+.orderCard__confirmButton:hover {
+  background: #5426c7;
+}
+
+.orderCard__confirmButton:disabled,
+.orderCard__cancelButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
