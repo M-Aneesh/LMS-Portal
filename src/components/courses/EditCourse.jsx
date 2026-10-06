@@ -65,6 +65,18 @@ console.log("COURSE THUMBNAIL:", course.thumbnail);
             course.prerequisites?.length > 0
               ? course.prerequisites
               : [{ title: "" }],
+          courseData:
+            course.courseData?.length > 0
+              ? course.courseData
+              : [
+                  {
+                    title: "",
+                    description: "",
+                    videoUrl: "",
+                    videoSection: "",
+                    videoLength: "",
+                  },
+                ],
         });
       } catch (error) {
         console.error("Fetch course error:", error);
@@ -93,6 +105,7 @@ console.log("COURSE THUMBNAIL:", course.thumbnail);
         demoUrl: values.demoUrl,
         benefits: values.benefits,
         prerequisites: values.prerequisites,
+        courseData: values.courseData,
       };
 
       // New thumbnail selected
@@ -108,8 +121,18 @@ console.log("COURSE THUMBNAIL:", course.thumbnail);
           payload.public_id = existingThumbnail.public_id;
         }
       }
+//       if (values.thumbnail) {
+//   payload.thumbnail = {
+//     url: values.thumbnail,
+//     public_id: existingThumbnail?.public_id
+//   };
+// }
 
-      console.log("Edit payload:", payload);
+     console.log("NEW THUMBNAIL:", values.thumbnail);
+console.log("EXISTING THUMBNAIL:", existingThumbnail);
+console.log("PUBLIC ID:", existingThumbnail?.public_id);
+console.log("FINAL EDIT PAYLOAD:", payload);
+
 
       await editCourseApi(id, payload);
 

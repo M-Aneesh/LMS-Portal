@@ -1,6 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import Styles from "./_course.module.css";
 
 const CourseModal = ({ course, onClose }) => {
+  const navigate = useNavigate();
+
+  const handleEnroll = () => {
+    navigate(`/courses/enroll/${course._id}`);
+  };
+
   return (
     <div
       className={Styles.courseModal}
@@ -58,6 +65,7 @@ const CourseModal = ({ course, onClose }) => {
           {course.benefits?.length > 0 && (
             <div className={Styles.courseModal__section}>
               <h3>What You'll Learn</h3>
+
               <ul>
                 {course.benefits.map((benefit, index) => (
                   <li key={index}>{benefit.title}</li>
@@ -69,6 +77,7 @@ const CourseModal = ({ course, onClose }) => {
           {course.prerequisites?.length > 0 && (
             <div className={Styles.courseModal__section}>
               <h3>Prerequisites</h3>
+
               <ul>
                 {course.prerequisites.map((item, index) => (
                   <li key={index}>{item.title}</li>
@@ -79,9 +88,7 @@ const CourseModal = ({ course, onClose }) => {
 
           <button
             className={Styles.courseModal__enrollButton}
-            onClick={() => {
-              console.log("Enroll in course:", course._id);
-            }}
+            onClick={handleEnroll}
           >
             Enroll Now
           </button>

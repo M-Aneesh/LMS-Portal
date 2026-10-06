@@ -408,3 +408,22 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+.courseForm__dynamicField label {
+  display: block;
+  margin-bottom: 6px;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.courseForm__dynamicField .courseForm__input,
+.courseForm__dynamicField .courseForm__textarea {
+  margin-bottom: 8px;
+}
+.courseForm__contentItem {
+  padding: 18px;
+  margin-bottom: 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background: #fafafa;
+}

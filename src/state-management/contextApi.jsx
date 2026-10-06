@@ -8,8 +8,8 @@ import {
 } from "../services/api/authServices";
 import { deleteUser, fetchAllUsers, updateRole ,
 } from "../services/api/adminServices";
-import { fetchAllCourses , fetchSingleCourse ,
-  fetchUserContent,fetchAllCoursesAdmin , createCourse ,editCourse} from "../services/api/courseServices";
+import { fetchAllCourses , fetchAllCoursesAdmin , createCourse, editCourse, fetchEnrollCourse} from "../services/api/courseServices";
+import { createOrder } from "../services/api/orderServices";
 
 export const AuthContext = createContext();
 
@@ -18,36 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [AllUsers , setAllUsers] = useState(null)
-  // const [courses , setCourse] = useState(null)
-  // const [AllCourses , setAllCourses] = useState(null)
-  //useEffect for fetching token and based token fetch users
-  //GLOBAL DATA
-  // --------------------------------
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     const token = localStorage.getItem("TOKEN");
-  //     // No token -> user is not logged in
-  //     if (!token) {
-  //       setUser(null);
-  //       setLoading(false);
-  //       return;
-  //     }
 
-  //     try {
-  //       //if token present in localstorage call GetMe function
-  //       const response = await GetMe();
-  //       setLoading(true)
-  //       setUser(response?.user ?? null);
-  //     } catch (error) {
-  //       console.error(error.response?.data || error.message);
-  //       setUser(null)
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchUser();
-  // }, []);
   useEffect(() => {
   const fetchUser = async () => {
     const token = localStorage.getItem("TOKEN");
@@ -71,13 +42,23 @@ export const AuthProvider = ({ children }) => {
 
   fetchUser();
 }, []);
+const refreshUser = async () => {
+  try {
+    const response = await GetMe();
+    setUser(response?.user ?? null);
+    return response?.user;
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    throw error;
+  }
+};
   /*======================== REGISTER BLOCK START HERE ========================*/
 
   const register = async (name, email, password) => {
     try {
       //fetch
       const { success, activationToken, activationCode, mailUrl } =
-        await createUser(name, email, password);
+        await createUser({name, email, password});
 
       if (success === true) {
         localStorage.setItem("activationToken", activationToken);
@@ -102,44 +83,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  /*========================ACTIVATION USER CODE ENDS HERE ========================*/
-
-  // const login = async (email, password) => {
-  //   try {
-  //     let { accessToken } = await Login(email, password);
-  //     localStorage.setItem("TOKEN", accessToken);
-  //       // IMPORTANT
-  //       setToken(accessToken);
-  //       const userData = await GetMe();
-  //       console.log("USER DATA:", userData);
-  //       setUser(userData.user);
-  //     return userData.user;
-
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // };
-
-  // -----------------------------------------
-  // LOGIN
-  // -----------------------------------------
-  // const login = async (email, password) => {
-  //   try {
-  //     const response = await Login(email, password);
-  //     if (!response?.accessToken) {
-  //       throw new Error("Access token was not returned by login API");
-  //     }
-  //     // Save token
-  //     localStorage.setItem("TOKEN", response.accessToken);
-  //     // Login API already returns user
-  //     setUser(response.user ?? null);
-  //     return response.user;
-  //   } catch (error) {
-  //     console.error(error.response?.data || error.message);
-
-  //     throw error;
-  //   }
-  // };
   const login = async (email, password) => {
   try {
     const response = await Login(email, password);
@@ -237,14 +180,6 @@ const logout = async () => {
     let res=await fetchAllCourses();
     return res
   }
-  const getSingleCourseApi = async(id)=>{
-    let res=await fetchSingleCourse(id)
-    return res
-  } 
-  const getUserContentApi = async(id)=>{
-    let res= await fetchUserContent(id)
-    return res
-  }
   const getAllCoursesAdminApi = async()=>{
     let res = await fetchAllCoursesAdmin()
     return res
@@ -253,17 +188,30 @@ const logout = async () => {
     let res = await createCourse(payload)
     return res
   }
+  const getEnrollCourseApi = async(id)=>{
+    let res = await fetchEnrollCourse(id)
+    return res
+  }
   const editCourseApi = async (id, payload) => {
-    const res = await editCourse(id, payload);
-    return res;
-  };
+  let res = await editCourse(id, payload);
+  return res;
+};
   /*-------------------COURSE DATA ENDS HERE---------------- */
+
+  /*--------------------ORDER DATA STARTS HERE---------------*/
+  const createOrderApi = async(payload)=>{
+    let res = await createOrder(payload)
+    return res
+  }
+
+  /*--------------------ORDER DATA ENDS HERE-----------------*/
+  console.log("CURRENT USER:", user);
   return (
     <>
       <AuthContext.Provider
         value={{ register, login, ActivationUser, token, user , logout , updateUserInfo , updateProfilePicture, updateUserPassword,
-          loading , AllUsers , getAllUsersApi , updateRoleApi , deleteUserApi, getAllCoursesApi ,getSingleCourseApi ,getAllCoursesAdminApi, createCourseApi,
-          editCourseApi , getUserContentApi
+          loading , AllUsers , getAllUsersApi , updateRoleApi , deleteUserApi, getAllCoursesApi , getAllCoursesAdminApi, createCourseApi,
+          createOrderApi , getEnrollCourseApi , refreshUser , editCourseApi
         }}
       >
         {children}

@@ -15,6 +15,15 @@ const initialValues = {
   demoUrl: "",
   benefits: [{ title: "" }],
   prerequisites: [{ title: "" }],
+  courseData: [
+  {
+    title: "",
+    description: "",
+    videoUrl: "",
+    videoSection: "",
+    videoLength: "",
+  },
+  ],
 };
 
 const CreateCourse = () => {

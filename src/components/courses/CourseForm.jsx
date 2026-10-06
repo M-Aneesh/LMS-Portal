@@ -36,36 +36,6 @@ const CourseForm = ({
         "Thumbnail is required",
         (value) => isEdit || Boolean(value)
         ),
-
-    // thumbnail: Yup.mixed()
-    //   .nullable()
-    //   .test(
-    //     "fileType",
-    //     "Only image files are allowed",
-    //     (value) => {
-    //       if (!value) return true;
-    //       return value.type.startsWith("image/");
-    //     }
-    //   )
-    //   .test(
-    //     "fileSize",
-    //     "Image size must be less than 2MB",
-    //     (value) => {
-    //       if (!value) return true;
-    //       return value.size <= MAX_SIZE;
-    //     }
-    //   )
-    //   .test(
-    //     "required",
-    //     "Thumbnail is required",
-    //     (value) => isEdit || Boolean(value)
-    //   ),
-    // // thumbnail: Yup.string()
-    // .required("Thumbnail URL is required")
-    // .url("Enter a valid thumbnail URL")
-    // .matches(
-    //     /^https?:\/\//,"Thumbnail URL must start with http:// or https://"
-    //     ),
     tags: Yup.string()
       .required("Tags are required"),
 
@@ -101,6 +71,29 @@ const CourseForm = ({
         })
       )
       .min(1, "Add at least one prerequisite"),
+    courseData: Yup.array()
+      .of(
+        Yup.object({
+          title: Yup.string()
+            .required("Content title is required"),
+
+          description: Yup.string()
+            .required("Content description is required"),
+
+          videoUrl: Yup.string()
+            .required("Video URL is required")
+            .url("Enter a valid video URL"),
+
+          videoSection: Yup.string()
+            .required("Video section is required"),
+
+          videoLength: Yup.number()
+            .typeError("Video length must be a number")
+            .required("Video length is required")
+            .min(0, "Video length cannot be negative"),
+        })
+      )
+      .min(1, "Add at least one course content"),
   });
 
   return (
@@ -270,76 +263,7 @@ const CourseForm = ({
                 </div>
             )}
             </div>
-               {/* <div className={Styles.courseForm__group}>
-                <label>Course Thumbnail</label>
 
-                {isEdit && existingThumbnail && (
-                  <div>
-                    <p>Current thumbnail:</p>
-
-                    <img
-                      src={existingThumbnail}
-                      alt="Current course thumbnail"
-                      width="180"
-                    />
-                  </div>
-                )}
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  className={Styles.courseForm__input}
-                  onChange={(event) => {
-                    const file =
-                      event.currentTarget.files?.[0] || null;
-
-                    setFieldValue("thumbnail", file);
-                  }}
-                />
-
-                <ErrorMessage
-                  name="thumbnail"
-                  component="p"
-                  className={Styles.courseForm__error}
-                />
-
-                <p className={Styles.courseForm__helper}>
-                  Maximum image size: 2MB.
-                  {isEdit &&
-                    " Leave empty to keep the current thumbnail."}
-                </p>
-              </div> */}
-                {/* <div className={Styles.courseForm__group}>
-                    <label>Course Thumbnail URL</label>
-
-                    <Field
-                        type="url"
-                        name="thumbnail"
-                        placeholder="https://example.com/course-image.jpg"
-                        className={Styles.courseForm__input}
-                    />
-
-                    <ErrorMessage
-                        name="thumbnail"
-                        component="p"
-                        className={Styles.courseForm__error}
-                    />
-
-                    {values.thumbnail && (
-                        <div>
-                        <p>Thumbnail Preview:</p>
-
-                        <img
-                            src={values.thumbnail}
-                            alt="Course thumbnail preview"
-                            width="180"
-                            onError={(event) => {
-                            event.currentTarget.style.display = "none";
-                            }}
-                        />
-                        </div>
-                    )}
-                    </div> */}
               {/* Tags */}
               <div className={Styles.courseForm__group}>
                 <label>Tags</label>
@@ -505,7 +429,127 @@ const CourseForm = ({
                   )}
                 </FieldArray>
               </div>
+              {/* Course Content */}
+              <div className={Styles.courseForm__section}>
+                <h3>Course Content</h3>
 
+                <FieldArray name="courseData">
+                  {({ push, remove }) => (
+                    <>
+                      {values.courseData.map((content, index) => (
+                        <div
+                          key={index}
+                          className={Styles.courseForm__contentItem}
+                        >
+                          <div className={Styles.courseForm__dynamicField}>
+
+                            <label>Content Title</label>
+
+                            <Field
+                              name={`courseData.${index}.title`}
+                              placeholder="Enter content title"
+                              className={Styles.courseForm__input}
+                            />
+
+                            <ErrorMessage
+                              name={`courseData.${index}.title`}
+                              component="p"
+                              className={Styles.courseForm__error}
+                            />
+
+                            <label>Content Description</label>
+
+                            <Field
+                              as="textarea"
+                              name={`courseData.${index}.description`}
+                              placeholder="Enter content description"
+                              className={Styles.courseForm__textarea}
+                            />
+
+                            <ErrorMessage
+                              name={`courseData.${index}.description`}
+                              component="p"
+                              className={Styles.courseForm__error}
+                            />
+
+                            <label>Video URL</label>
+
+                            <Field
+                              type="url"
+                              name={`courseData.${index}.videoUrl`}
+                              placeholder="https://youtube.com/watch?v=..."
+                              className={Styles.courseForm__input}
+                            />
+
+                            <ErrorMessage
+                              name={`courseData.${index}.videoUrl`}
+                              component="p"
+                              className={Styles.courseForm__error}
+                            />
+
+                            <label>Video Section</label>
+
+                            <Field
+                              type="text"
+                              name={`courseData.${index}.videoSection`}
+                              placeholder="Introduction"
+                              className={Styles.courseForm__input}
+                            />
+
+                            <ErrorMessage
+                              name={`courseData.${index}.videoSection`}
+                              component="p"
+                              className={Styles.courseForm__error}
+                            />
+
+                            <label>Video Length</label>
+
+                            <Field
+                              type="number"
+                              name={`courseData.${index}.videoLength`}
+                              placeholder="Video length in minutes"
+                              className={Styles.courseForm__input}
+                            />
+
+                            <ErrorMessage
+                              name={`courseData.${index}.videoLength`}
+                              component="p"
+                              className={Styles.courseForm__error}
+                            />
+
+                            {values.courseData.length > 1 && (
+                              <button
+                                type="button"
+                                onClick={() => remove(index)}
+                                className={Styles.courseForm__removeButton}
+                              >
+                                Remove Content
+                              </button>
+                            )}
+
+                          </div>
+                        </div>
+                      ))}
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          push({
+                            title: "",
+                            description: "",
+                            videoUrl: "",
+                            videoSection: "",
+                            videoLength: "",
+                          })
+                        }
+                        className={Styles.courseForm__addButton}
+                      >
+                        + Add Course Content
+                      </button>
+                    </>
+                  )}
+                </FieldArray>
+              </div>
               {/* Submit */}
               <button
                 type="submit"

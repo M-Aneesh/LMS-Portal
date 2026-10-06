@@ -20,13 +20,16 @@ import CoursePage from "./components/courses/CoursePage";
 import AdminCoursePage from "./components/courses/AdminCoursePage"
 import CreateCourse from "./components/courses/CreateCourse";
 import EditCourse from "./components/courses/EditCourse";
-import GetSingleCourse from "./components/courses/GetSingleCourse";
-import EnrollContent from "./components/courses/EnrollContent";
+import Createorders from "./components/orders/Createorders";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <Fragment>
       <Router>
+        <ToastContainer />
         <section id="navbar">
           <article className="container">
             <aside className="top_header">
@@ -43,20 +46,20 @@ const App = () => {
 
                 <Route element={<ProtectedRoutes />}>
                   <Route path="/courses" element={<CoursePage />} />
-                  <Route path="/courses:id" element={<GetSingleCourse/>}/>
+                  <Route path="/courses/enroll/:courseId" element={<Createorders />}/>
                   <Route path="/user/profile" element={<ProfileDashboard />} >
                     <Route index element={<ProfileIndexPage />} />
                     <Route path="update-user-info" element={<UpdateProfileInfo />} />
                     <Route path='update-profile-picture' element={<UpdateProfilePicture />} />
                     <Route path="update-user-password" element={<UpdateUserPassword />} />
-                    <Route path="user-enrollment" element={<EnrollContent/>}/>
                   </Route>
                 </Route>
                 <Route element={<AdminRoute />}>
                   <Route path="/admin/courses" element={<AdminCoursePage />} />
                   <Route path="/admin/create-courses" element={ <CreateCourse /> } />
-                  <Route path="/admin/edit-courses/:id" element={<EditCourse/>} />
+                  <Route path="/admin/edit-courses/:id" element={<EditCourse />}/>
                   <Route path="admin/admin-dashboard" element={<AdminDashboard />}>
+
                     <Route index element={<GetAllUsers />} />
                     <Route path="user/:id" element={<SingleUser />} />
                   </Route>
