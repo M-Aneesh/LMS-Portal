@@ -278,3 +278,27 @@
   text-decoration: none;
   font-size: 13px;
 }
+
+.profileCourse__media {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profileCourse__askButton {
+  margin-top: 30px;
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #6c3ce9;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.profileCourse__askButton:hover {
+  background: #5426c7;
+}

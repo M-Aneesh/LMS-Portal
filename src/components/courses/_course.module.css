@@ -427,3 +427,188 @@
   border-radius: 8px;
   background: #fafafa;
 }
+
+/* =========================
+   Ask Question
+========================= */
+
+.askQuestion {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  background: #f7f7f9;
+}
+
+.askQuestion__card {
+  width: 100%;
+  max-width: 650px;
+  padding: 28px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.askQuestion__card h2 {
+  margin: 0 0 24px;
+  color: #222;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Course Information */
+
+.askQuestion__course {
+  margin-bottom: 24px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #f5f1ff;
+  border: 1px solid #e4d9ff;
+}
+
+.askQuestion__course label {
+  display: block;
+  margin-bottom: 6px;
+  color: #777;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.askQuestion__course h3 {
+  margin: 0;
+  color: #4f3b78;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Form Fields */
+
+.askQuestion__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.askQuestion__field label {
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Select and Textarea */
+
+.askQuestion__field select,
+.askQuestion__field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  color: #222;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.askQuestion__field select {
+  cursor: pointer;
+}
+
+.askQuestion__field select:focus,
+.askQuestion__field textarea:focus {
+  border-color: #6c3ce9;
+  box-shadow: 0 0 0 3px rgba(108, 60, 233, 0.1);
+}
+
+.askQuestion__field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Validation Error */
+
+.error {
+  margin: 0;
+  color: #dc2626;
+  font-size: 13px;
+}
+
+/* Buttons */
+
+.askQuestion__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.askQuestion__actions button {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+/* Cancel */
+
+.askQuestion__actions button[type="button"] {
+  background: #eee;
+  color: #444;
+}
+
+.askQuestion__actions button[type="button"]:hover {
+  background: #ddd;
+}
+
+/* Submit */
+
+.askQuestion__actions button[type="submit"] {
+  background: #6c3ce9;
+  color: #fff;
+}
+
+.askQuestion__actions button[type="submit"]:hover {
+  background: #5426c7;
+}
+
+/* Disabled */
+
+.askQuestion__actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Missing Course Information */
+
+.askQuestion__card > p {
+  margin-bottom: 20px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.askQuestion__card > button {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #6c3ce9;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.askQuestion__card > button:hover {
+  background: #5426c7;
+}
